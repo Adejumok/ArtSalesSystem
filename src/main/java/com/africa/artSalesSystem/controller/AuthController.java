@@ -8,6 +8,7 @@ import com.africa.artSalesSystem.exception.ArtSalesSystemException;
 import com.africa.artSalesSystem.models.ArtSystemUser;
 import com.africa.artSalesSystem.security.jwt.TokenProvider;
 import com.africa.artSalesSystem.service.UserService;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,11 +25,10 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
-
     private final TokenProvider tokenProvider;
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerCustomer( @NonNull @RequestBody RegisterCustomerRequest registerCustomerRequest){
+    public ResponseEntity<?> registerCustomer( @NonNull @RequestBody RegisterCustomerRequest registerCustomerRequest) throws UnirestException {
         RegisterCustomerResponse registerCustomerResponse = userService.registerCustomer(registerCustomerRequest);
         return new ResponseEntity<>(registerCustomerResponse, HttpStatus.CREATED);
     }

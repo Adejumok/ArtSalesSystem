@@ -1,5 +1,6 @@
 package com.africa.artSalesSystem.service;
 
+import com.africa.artSalesSystem.dto.request.MailRequest;
 import com.africa.artSalesSystem.dto.request.RegisterCustomerRequest;
 import com.africa.artSalesSystem.dto.response.RegisterCustomerResponse;
 import com.africa.artSalesSystem.exception.ArtSalesSystemException;
@@ -7,6 +8,7 @@ import com.africa.artSalesSystem.exception.CustomerAlreadyExistException;
 import com.africa.artSalesSystem.models.Role;
 import com.africa.artSalesSystem.models.ArtSystemUser;
 import com.africa.artSalesSystem.repositories.UserRepository;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,9 +30,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
     private final ModelMapper mapper;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final EmailService emailService;
 
     @Override
-    public RegisterCustomerResponse registerCustomer(RegisterCustomerRequest registerCustomerRequest)  {
+    public RegisterCustomerResponse registerCustomer(RegisterCustomerRequest registerCustomerRequest) throws UnirestException {
         Optional<ArtSystemUser> foundCustomer = userRepository.findByEmail(registerCustomerRequest.getEmail());
         if(foundCustomer.isPresent()){
             throw new CustomerAlreadyExistException("Customer with email "+registerCustomerRequest.getEmail()+" already exist",400);
@@ -43,7 +46,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         RegisterCustomerResponse response = new RegisterCustomerResponse();
         response.setMessage(String.format("%s registered successfully", savedCustomer.getFirstName()));
         response.setEmail(savedCustomer.getEmail());
+        sendMail(registerCustomerRequest);
         return response;
+    }
+
+    private void sendMail(RegisterCustomerRequest registerCustomerRequest) throws UnirestException {
+        MailRequest mailRequest = MailRequest.builder()
+                .sender(System.getenv("SENDER"))
+                .receiver(registerCustomerRequest.getEmail())
+                .subject("Welcome to Art Sales Platform")
+                .body("Hello "+ registerCustomerRequest.getFirstName()+". We are glad to let you know you have successfully registered")
+                .build();
+        emailService.sendSimpleMail(mailRequest);
     }
 
     @Override
@@ -62,7 +76,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if(user != null){
             return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),getAuthorities(user.getRoles()));
         }
-        throw new ArtSalesSystemException("Customer with email "+username+" does not exist",404);
+        throw new ArtSalesSystemException("User with email "+username+" does not exist",404);
     }
     private Collection<? extends GrantedAuthority> getAuthorities(Set<Role> roles){
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRoleType().name())).collect(Collectors.toSet());
