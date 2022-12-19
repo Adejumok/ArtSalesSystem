@@ -79,7 +79,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         throw new ArtSalesSystemException("User with email "+username+" does not exist",404);
     }
     private Collection<? extends GrantedAuthority> getAuthorities(Set<Role> roles){
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRoleType().name())).collect(Collectors.toSet());
+        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRoleType().name()))
+                .collect(Collectors.toSet());
     }
     }
 
