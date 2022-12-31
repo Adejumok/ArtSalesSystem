@@ -1,0 +1,29 @@
+package com.africa.artSalesSystem.component.models;
+
+import lombok.*;
+import org.hibernate.annotations.Cascade;
+import org.springframework.stereotype.Component;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Component
+@Setter
+@Builder
+@ToString
+public class Cart {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    private List<Art> arts = new ArrayList<>();
+    private BigDecimal subTotal = BigDecimal.ZERO;
+
+}

@@ -1,13 +1,13 @@
 package com.africa.artSalesSystem.controller;
 
-import com.africa.artSalesSystem.dto.AuthToken;
-import com.africa.artSalesSystem.dto.request.LoginRequest;
-import com.africa.artSalesSystem.dto.request.RegisterCustomerRequest;
-import com.africa.artSalesSystem.dto.response.RegisterCustomerResponse;
+import com.africa.artSalesSystem.security.AuthToken;
+import com.africa.artSalesSystem.component.dto.request.LoginRequest;
+import com.africa.artSalesSystem.component.dto.request.RegisterCustomerRequest;
+import com.africa.artSalesSystem.component.dto.response.RegisterCustomerResponse;
 import com.africa.artSalesSystem.exception.ArtSalesSystemException;
-import com.africa.artSalesSystem.models.ArtSystemUser;
+import com.africa.artSalesSystem.component.models.ArtSystemUser;
 import com.africa.artSalesSystem.security.jwt.TokenProvider;
-import com.africa.artSalesSystem.service.UserService;
+import com.africa.artSalesSystem.component.service.UserService;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
