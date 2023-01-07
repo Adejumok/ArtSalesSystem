@@ -13,12 +13,9 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Validated
 public class AddArtRequest {
     private String artTitle;
     private ArtType artType;
     private BigDecimal artPrice;
     private String artDescription;
-    @NotNull
-    private MultipartFile image;
 }

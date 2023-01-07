@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/art")
+@CrossOrigin("http://localhost:3000")
 @AllArgsConstructor
 public class ArtController {
 

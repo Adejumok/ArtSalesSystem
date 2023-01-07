@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -47,14 +48,14 @@ public class ArtServiceImpTest {
     }
 
     @Test
-    void addRequestTest(){
+    void addRequestTest() throws IOException {
         AddArtResponse response = artService.addArt(addArtRequest);
         assertThat(response).isNotNull();
         log.info("The response message is -> {}", response);
     }
 
     @Test
-    void sameArtAddRequestGetErrorTest(){
+    void sameArtAddRequestGetErrorTest() throws IOException {
         AddArtResponse response = artService.addArt(addArtRequest2);
         assertThrows(ArtSalesSystemException.class,()-> artService.addArt(addArtRequest2));
         assertThat(response.getArtTitle()).isEqualTo("Adeweh the Industrial Designer");

@@ -13,7 +13,7 @@ import java.util.Map;
     private final Cloudinary cloudinary;
     @Override
     public String upload(byte[] imageBytes, Map<?, ?> map) throws IOException {
-        Map uploadResponse = cloudinary.uploader()
+        var uploadResponse = cloudinary.uploader()
                 .upload(imageBytes, ObjectUtils.emptyMap());
         return uploadResponse.get("url").toString();
     }

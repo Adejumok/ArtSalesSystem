@@ -28,19 +28,19 @@ import java.util.Optional;
         if(foundArt != null){
             throw new ArtSalesSystemException("Art with title "+addArtRequest.getArtTitle()+" already exist",400);
         }
-        foundArt = Art.builder()
-                .artDescription(addArtRequest.getArtDescription())
-                .artPrice(addArtRequest.getArtPrice())
-                .artType(addArtRequest.getArtType())
-                .artTitle(addArtRequest.getArtTitle())
-                .build();
-        String imageUrl = cloudService.upload(addArtRequest.getImage()
-                .getBytes(), ObjectUtils.emptyMap());
-        foundArt.setImageUrl(imageUrl);
-        Art savedArt = artRepository.save(foundArt);
+        Art savedArt = getAddedArt(addArtRequest);
         AddArtResponse addArtResponse = new AddArtResponse();
         BeanUtils.copyProperties(savedArt,addArtResponse);
         return addArtResponse;
+    }
+
+    private Art getAddedArt(AddArtRequest addArtRequest) {
+        Art art = new Art();
+        art.setArtPrice(addArtRequest.getArtPrice());
+        art.setArtDescription(addArtRequest.getArtDescription());
+        art.setArtType(addArtRequest.getArtType());
+        art.setArtTitle(addArtRequest.getArtTitle());
+        return artRepository.save(art);
     }
 
     @Override
@@ -84,11 +84,7 @@ import java.util.Optional;
     public EditArtResponse editArt(EditArtRequest editArtRequest) {
         Art foundArt = findArtById(editArtRequest.getId());
         if (foundArt != null){
-            foundArt.setArtTitle(editArtRequest.getArtTitle());
-            foundArt.setArtType(editArtRequest.getArtType());
-            foundArt.setArtPrice(editArtRequest.getArtPrice());
-            foundArt.setArtDescription(editArtRequest.getArtDescription());
-            artRepository.save(foundArt);
+            editArt(editArtRequest, foundArt);
             EditArtResponse editArtResponse = new EditArtResponse();
             BeanUtils.copyProperties(foundArt, editArtResponse);
             editArtResponse.setMessage("Art with id "+editArtRequest.getId()+" successfully updated.");
@@ -96,5 +92,13 @@ import java.util.Optional;
 
         }
         throw new ArtSalesSystemException("Art with id "+editArtRequest.getId()+" not found.", 400);
+    }
+
+    private void editArt(EditArtRequest editArtRequest, Art foundArt) {
+        foundArt.setArtTitle(editArtRequest.getArtTitle());
+        foundArt.setArtType(editArtRequest.getArtType());
+        foundArt.setArtPrice(editArtRequest.getArtPrice());
+        foundArt.setArtDescription(editArtRequest.getArtDescription());
+        artRepository.save(foundArt);
     }
 }

@@ -3,6 +3,7 @@ package com.africa.artSalesSystem.component.service;
 import com.africa.artSalesSystem.component.dto.request.MailRequest;
 import com.africa.artSalesSystem.component.dto.request.RegisterCustomerRequest;
 import com.africa.artSalesSystem.component.dto.response.RegisterCustomerResponse;
+import com.africa.artSalesSystem.component.models.enums.RoleType;
 import com.africa.artSalesSystem.component.service.notification.EmailService;
 import com.africa.artSalesSystem.exception.ArtSalesSystemException;
 import com.africa.artSalesSystem.exception.CustomerAlreadyExistException;
@@ -39,15 +40,20 @@ import java.util.stream.Collectors;
         if(foundCustomer.isPresent()){
             throw new CustomerAlreadyExistException("Customer with email "+registerCustomerRequest.getEmail()+" already exist",400);
         }
-        ArtSystemUser customer = mapper.map(registerCustomerRequest, ArtSystemUser.class);
-        String encodedPassword = bCryptPasswordEncoder.encode(customer.getPassword());
-        customer.setPassword(encodedPassword);
-        ArtSystemUser savedCustomer = userRepository.save(customer);
+        ArtSystemUser savedCustomer = getRegisteredArtSystemUser(registerCustomerRequest);
         RegisterCustomerResponse response = new RegisterCustomerResponse();
         response.setMessage(String.format("%s registered successfully", savedCustomer.getFirstName()));
         response.setEmail(savedCustomer.getEmail());
         sendMail(registerCustomerRequest);
         return response;
+    }
+
+    private ArtSystemUser getRegisteredArtSystemUser(RegisterCustomerRequest registerCustomerRequest) {
+        ArtSystemUser customer = mapper.map(registerCustomerRequest, ArtSystemUser.class);
+        String encodedPassword = bCryptPasswordEncoder.encode(customer.getPassword());
+        customer.setPassword(encodedPassword);
+        customer.getRoles().add(new Role(RoleType.ROLE_USER));
+        return userRepository.save(customer);
     }
 
     private void sendMail(RegisterCustomerRequest registerCustomerRequest) throws UnirestException {

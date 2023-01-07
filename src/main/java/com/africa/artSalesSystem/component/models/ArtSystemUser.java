@@ -26,18 +26,14 @@ public class ArtSystemUser {
     private String mobile;
     private String address;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Payment> payments;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Role> roles;
+    private Set<Payment> payments = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Role> roles = new HashSet<>();
 
     public ArtSystemUser(String firstName, String lastName, String email, String password, RoleType roleType) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        if(roles == null){
-            roles = new HashSet<>();
-            roles.add(new Role(roleType));
-        }
     }
 }
