@@ -1,7 +1,9 @@
 package com.africa.artSalesSystem.component.service;
 
-import com.africa.artSalesSystem.component.dto.request.CartRequest;
-import com.africa.artSalesSystem.component.dto.response.CartResponse;
+import com.africa.artSalesSystem.component.dto.request.AddArtToCartRequest;
+import com.africa.artSalesSystem.component.dto.request.AddCartRequest;
+import com.africa.artSalesSystem.component.dto.response.AddArtToCartResponse;
+import com.africa.artSalesSystem.component.dto.response.AddCartResponse;
 import com.africa.artSalesSystem.exception.ArtSalesSystemException;
 import com.africa.artSalesSystem.component.models.Art;
 import com.africa.artSalesSystem.component.models.Cart;
@@ -19,7 +21,21 @@ class CartServiceImpl implements CartService{
     private final ArtService artService;
 
     @Override
-    public CartResponse addArtToCart(CartRequest cartRequest) {
+    public AddCartResponse addCart(String cartId, AddCartRequest request) {
+        Optional<Cart> foundCart = cartRepository.findById(Long.valueOf(cartId));
+        if (foundCart.isPresent()){
+            throw new ArtSalesSystemException("Cart with id "+cartId+" already added.", 404);
+        }
+        Cart cart = new Cart();
+        cart.setSubTotal(request.getSubTotal());
+        cartRepository.save(cart);
+        return AddCartResponse.builder()
+                .message("Cart with id "+cartId+"added successfully.")
+                .build();
+    }
+
+    @Override
+    public AddArtToCartResponse addArtToCart(AddArtToCartRequest cartRequest) {
         Optional<Cart> foundCart = cartRepository.findById(cartRequest.getCartId());
         if (foundCart.isEmpty()){
             throw new ArtSalesSystemException("Cart with id "+cartRequest.getCartId()+" does not exist", 404);
@@ -28,7 +44,7 @@ class CartServiceImpl implements CartService{
         Art art = artService.findArtByArtTitle(cartRequest.getArtTitle());
         cart1.getArts().add(art);
         Cart savedCart = cartRepository.save(updateCartPriceSubTotal(cart1, art));
-        return CartResponse.builder()
+        return AddArtToCartResponse.builder()
                 .cart(savedCart)
                 .message("Art with title "+cartRequest.getArtTitle()+" successfully " +
                         "added to cart with id "+cart1.getId())

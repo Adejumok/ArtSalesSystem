@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CartResponse {
+public class AddCartResponse {
     private String message;
     private Cart cart;
 }

@@ -41,15 +41,15 @@ public class ArtController {
         return new ResponseEntity<>(arts, HttpStatus.OK);
     }
 
-    @PutMapping("/editArt/{artId}")
+    @PatchMapping("/editArt/{artId}")
     public ResponseEntity<?> editArt(@RequestBody EditArtRequest request, @PathVariable String artId){
-        EditArtResponse response = artService.editArt(request);
+        EditArtResponse response = artService.editArt(artId,request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/{artId}")
     public ResponseEntity<?> deleteArt(@PathVariable String artId){
-        artService.deleteArt(artId);
+        artService.deleteArt(Long.valueOf(artId));
         return new ResponseEntity<>("Art successfully deleted", HttpStatus.OK);
     }
 

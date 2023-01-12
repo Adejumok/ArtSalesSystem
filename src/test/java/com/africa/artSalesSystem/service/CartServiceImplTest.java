@@ -1,9 +1,11 @@
 package com.africa.artSalesSystem.service;
 
+import com.africa.artSalesSystem.component.dto.request.AddCartRequest;
+import com.africa.artSalesSystem.component.dto.response.AddCartResponse;
 import com.africa.artSalesSystem.component.service.ArtService;
 import com.africa.artSalesSystem.component.service.CartService;
-import com.africa.artSalesSystem.component.dto.request.CartRequest;
-import com.africa.artSalesSystem.component.dto.response.CartResponse;
+import com.africa.artSalesSystem.component.dto.request.AddArtToCartRequest;
+import com.africa.artSalesSystem.component.dto.response.AddArtToCartResponse;
 import com.africa.artSalesSystem.component.models.Art;
 import com.africa.artSalesSystem.component.models.Cart;
 import com.africa.artSalesSystem.component.models.enums.ArtType;
@@ -28,6 +30,7 @@ public class CartServiceImplTest {
     private ArtService artService;
     private Cart savedCart;
     private Art art;
+    private AddCartRequest request;
 
 
     @BeforeEach
@@ -36,27 +39,37 @@ public class CartServiceImplTest {
         savedCart = cartService.save(cart);
 
         art = Art.builder()
-                .artTitle("African Art")
-                .artType(ArtType.DRAWING)
+                .artTitle("European Art")
+                .artType(ArtType.FILM)
                 .artId(1L)
-                .artPrice(BigDecimal.valueOf(12323.4))
+                .artPrice(BigDecimal.valueOf(3000))
+                .build();
+        request = AddCartRequest.builder()
+                .subTotal(BigDecimal.ZERO)
                 .build();
 
         artService.saveArt(art);
+
+    }
+
+    @Test
+    void addCartTest(){
+        AddCartResponse response = cartService.addCart("1", request);
+        assertThat(response).isNotNull();
     }
 
     @Test
     @DisplayName("Test that cart can be created")
     void addArtToCartTest(){
-        CartRequest cartRequest = CartRequest.builder()
-                .cartId(savedCart.getId())
-                .artTitle(art.getArtTitle())
+        AddArtToCartRequest cartRequest = AddArtToCartRequest.builder()
+                .cartId(5L)
+                .artTitle("Tarbnaz")
                 .build();
 
-        CartResponse response = cartService.addArtToCart(cartRequest);
+        AddArtToCartResponse response = cartService.addArtToCart(cartRequest);
         log.info("{}->", response.getMessage());
         assertThat(response).isNotNull();
-        assertThat(response.getCart().getSubTotal()).isGreaterThan(BigDecimal.valueOf(12000));
+        assertThat(response.getCart().getSubTotal()).isEqualTo(BigDecimal.valueOf(700.00));
     }
 
 }

@@ -21,7 +21,6 @@ import java.util.Optional;
 @Service
  class ArtServiceImpl implements ArtService{
     private final ArtRepository artRepository;
-    private final CloudService cloudService;
     @Override
     public AddArtResponse addArt(AddArtRequest addArtRequest) throws IOException {
         Art foundArt = artRepository.findByArtTitle(addArtRequest.getArtTitle()).orElse(null);
@@ -67,8 +66,8 @@ import java.util.Optional;
     }
 
     @Override
-    public void deleteArt(String artId) {
-        Optional<Art> foundArt = artRepository.findById(Long.valueOf(artId));
+    public void deleteArt(Long artId) {
+        Optional<Art> foundArt = artRepository.findById(artId);
         if(foundArt.isEmpty()){
             throw new ArtSalesSystemException("Art with id "+artId+" not found", 404);
         }
@@ -81,17 +80,17 @@ import java.util.Optional;
     }
 
     @Override
-    public EditArtResponse editArt(EditArtRequest editArtRequest) {
-        Art foundArt = findArtById(editArtRequest.getId());
+    public EditArtResponse editArt(String artId, EditArtRequest editArtRequest) {
+        Art foundArt = findArtById(Long.valueOf(artId));
         if (foundArt != null){
             editArt(editArtRequest, foundArt);
             EditArtResponse editArtResponse = new EditArtResponse();
             BeanUtils.copyProperties(foundArt, editArtResponse);
-            editArtResponse.setMessage("Art with id "+editArtRequest.getId()+" successfully updated.");
+            editArtResponse.setMessage("Art with id "+artId+" successfully updated.");
             return editArtResponse;
 
         }
-        throw new ArtSalesSystemException("Art with id "+editArtRequest.getId()+" not found.", 400);
+        throw new ArtSalesSystemException("Art with id "+artId+" not found.", 400);
     }
 
     private void editArt(EditArtRequest editArtRequest, Art foundArt) {

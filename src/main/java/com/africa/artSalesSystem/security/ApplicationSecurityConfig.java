@@ -2,6 +2,7 @@ package com.africa.artSalesSystem.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -31,6 +32,10 @@ public class ApplicationSecurityConfig{
                 .authorizeHttpRequests(authorize -> {
                     try {
                         authorize.antMatchers("/**/auth/**").permitAll()
+                                .antMatchers(
+                                        HttpMethod.GET,
+                                        "/index*", "/static/**", "/*.js", "/*.json", "/*.ico")
+                                .permitAll()
                                 .antMatchers("/customError").permitAll()
                                 .antMatchers("/access-denied").permitAll()
                                 .anyRequest().authenticated()

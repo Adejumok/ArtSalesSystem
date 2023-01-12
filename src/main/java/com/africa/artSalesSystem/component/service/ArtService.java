@@ -16,8 +16,8 @@ public interface ArtService {
     Art findArtById(Long artId);
     Art findArtByArtTitle(String artTitle);
     List<Art> getAllArts();
-    void deleteArt(String artId);
+    void deleteArt(Long artId);
     void saveArt(Art art);
 
-    EditArtResponse editArt(EditArtRequest editArtRequest);
+    EditArtResponse editArt(String artId, EditArtRequest editArtRequest);
 }

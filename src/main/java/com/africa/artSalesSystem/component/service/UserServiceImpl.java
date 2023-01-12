@@ -49,11 +49,11 @@ import java.util.stream.Collectors;
     }
 
     private ArtSystemUser getRegisteredArtSystemUser(RegisterCustomerRequest registerCustomerRequest) {
-        ArtSystemUser customer = mapper.map(registerCustomerRequest, ArtSystemUser.class);
-        String encodedPassword = bCryptPasswordEncoder.encode(customer.getPassword());
-        customer.setPassword(encodedPassword);
-        customer.getRoles().add(new Role(RoleType.ROLE_USER));
-        return userRepository.save(customer);
+        ArtSystemUser user = mapper.map(registerCustomerRequest, ArtSystemUser.class);
+        String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        user.getRoles().add(new Role(RoleType.ROLE_USER));
+        return userRepository.save(user);
     }
 
     private void sendMail(RegisterCustomerRequest registerCustomerRequest) throws UnirestException {

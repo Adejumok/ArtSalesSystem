@@ -43,7 +43,6 @@ public class ArtServiceImpTest {
                 .artTitle("Abang the Industrial Designer")
                 .artType(ArtType.SCULPTURE)
                 .artPrice(BigDecimal.valueOf(800))
-                .id(1L)
                 .build();
     }
 
@@ -63,7 +62,8 @@ public class ArtServiceImpTest {
 
     @Test
     void editArtTest(){
-        EditArtResponse response = artService.editArt(editArtRequest);
+        String artId = "";
+        EditArtResponse response = artService.editArt(artId, editArtRequest);
         assertThat(response.getArtTitle()).isEqualTo("Abang the Industrial Designer");
         assertThat(response).isNotNull();
 
