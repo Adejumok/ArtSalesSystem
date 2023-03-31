@@ -41,7 +41,7 @@ public class ArtController {
         return new ResponseEntity<>(arts, HttpStatus.OK);
     }
 
-    @PatchMapping("/editArt/{artId}")
+    @PatchMapping(value = "/editArt/{artId}")
     public ResponseEntity<?> editArt(@RequestBody EditArtRequest request, @PathVariable String artId){
         EditArtResponse response = artService.editArt(artId,request);
         return new ResponseEntity<>(response, HttpStatus.OK);

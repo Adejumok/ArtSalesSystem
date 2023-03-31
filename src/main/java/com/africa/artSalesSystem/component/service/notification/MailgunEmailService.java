@@ -2,7 +2,6 @@ package com.africa.artSalesSystem.component.service.notification;
 
 import com.africa.artSalesSystem.component.dto.request.MailRequest;
 import com.africa.artSalesSystem.component.dto.response.MailResponse;
-import com.africa.artSalesSystem.component.service.notification.EmailService;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;

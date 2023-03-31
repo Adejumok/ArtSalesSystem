@@ -32,10 +32,6 @@ public class ApplicationSecurityConfig{
                 .authorizeHttpRequests(authorize -> {
                     try {
                         authorize.antMatchers("/**/auth/**").permitAll()
-                                .antMatchers(
-                                        HttpMethod.GET,
-                                        "/index*", "/static/**", "/*.js", "/*.json", "/*.ico")
-                                .permitAll()
                                 .antMatchers("/customError").permitAll()
                                 .antMatchers("/access-denied").permitAll()
                                 .anyRequest().authenticated()
