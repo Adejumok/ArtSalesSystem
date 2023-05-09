@@ -23,6 +23,7 @@ These instructions will help you get a copy of the project up and running on you
 
 - [Java](https://www.java.com/) (version 11 or higher)
 - [Maven](https://maven.apache.org/) (version 3.9.9 or higher)
+- [Spring Boot](https://spring.io/) (version 2.7.2 or higher)
 - [Postgres](https://www.postgresql.org/) (version 15.2 or higher)
 
 ### Installation
