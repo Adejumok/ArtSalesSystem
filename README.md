@@ -1,5 +1,5 @@
 # Art Sales System
-This is a Java/Maven/Spring Boot (version 2.7.2) application for art work sales as well as provide other services like inventory and security.
+This is a Java/Maven/Spring Boot(version 2.7.2) application for art work sales. It also provide other services like inventory and security.
 
 ## Table of Contents
 
