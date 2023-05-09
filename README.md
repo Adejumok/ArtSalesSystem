@@ -31,7 +31,7 @@ These instructions will help you get a copy of the project up and running on you
 1. Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/Adejumok/LibraryServiceSystem
+git clone https://github.com/Adejumok/ArtSalesSystem
 ```
 
 2. Change directory to the project folder:
@@ -65,7 +65,7 @@ The application will be running at `http://localhost:8080`.
 
 Before using this project, ensure that you have the following software installed on your machine:
 
-- Java 11 or later
+- Java 17 or later
 - Maven
 
 ### Running the Project
@@ -75,7 +75,7 @@ To run the project, follow these steps:
 1. Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/Adejumok/LibraryServiceSystem
+git clone https://github.com/Adejumok/ArtSalesSystem
 ```
 
 2. Change to the project directory:
@@ -104,14 +104,11 @@ Here are the available API endpoints:
 
 | Method | Endpoint | Description |
 | ------ | -------- | ----------- |
-| GET    | /getAllUsers | Returns a list of all users. |
-| GET    | /user/{id} | Returns the user with the specified ID. |
-| POST   | /signup | Adds a new user. |
-| POST   | /login | validates an existing user using email and password. |
-| PATCH    | /update/{id} | Updates the user with the specified ID. |
-| GET    | /getBook/{isbn} | Returns the book with the specified ISBN. |
-| POST   | /addBook | Adds a new book. |
-| DELETE | /deleteBook/{isbn} | Deletes the book with the specified ISBN. |
+| GET    | /api/v1/art/getAllArts | Returns a list of all arts. |
+| GET    | /api/v1/art/getArt/{artId} | Returns the art with the specified ID. |
+| POST   | /api/v1/art/addArt | Adds a new art. |
+| PATCH    | /api/v1/art/update/{artId} | Updates the user with the specified ID. |
+| DELETE | /api/v1/art/deleteBook/{artId} | Deletes the art with the specified ID. |
 
 ### Examples
 
