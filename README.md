@@ -21,8 +21,8 @@ These instructions will help you get a copy of the project up and running on you
 
 ### Prerequisites
 
-- [Java](https://www.java.com/) (version 11 or higher)
-- [Maven](https://maven.apache.org/) (version 3.9.9 or higher)
+- [Java](https://www.java.com/) (version 17 or higher)
+- [Maven](https://maven.apache.org/) (version 3.0 or higher)
 - [Spring Boot](https://spring.io/) (version 2.7.2 or higher)
 - [Postgres](https://www.postgresql.org/) (version 15.2 or higher)
 
@@ -165,13 +165,6 @@ Please feel free to contact me if you have any questions or feedback.
 
 - Email: roseadeyinka01@example.com
 - GitHub: https://github.com/Adejumok
-
-## Technology
-* Java 17
-* Spring Boot 2.7.2
-* Spring Security
-* Spring Data Jpa for Persistence
-* Maven 3.0+
 
 ## About the Service
 This service makes use of REST service. H2 is the in-memory database used to store it data. PostgreSQL relational database can also be used as it is one of the pom.xml dependencies of the project.
