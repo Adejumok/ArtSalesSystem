@@ -137,7 +137,7 @@ To get a list of all arts, send a `GET` request to `/api/v1/art/getAllArts`.
   "artTitle": "New Title",
   "artType": "Sculpture",
   "artPrice": 289.00,
-  "password": "user's password"
+  "artDescription": "A new kinda art"
 
 }
 ```
