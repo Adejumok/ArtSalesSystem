@@ -125,9 +125,9 @@ Here are the available API endpoints:
 
 Here are a few examples of how to use this project:
 
-#### Example 1: Getting all users
+#### Example 1: Getting all arts
 
-To get a list of all users, send a `GET` request to `/getAllUsers`.
+To get a list of all arts, send a `GET` request to `/api/v1/art/getAllArts`.
 
 #### Example 2: Adding a new user
 
