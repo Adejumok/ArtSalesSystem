@@ -134,9 +134,11 @@ To get a list of all arts, send a `GET` request to `/api/v1/art/getAllArts`.
 
 ```json
 {
-  "firstName": "New Name",
-  "email": "user@gmail.com",
+  "artTitle": "New Title",
+  "artType": "Sculpture",
+  "artPrice": 289.00,
   "password": "user's password"
+
 }
 ```
 
