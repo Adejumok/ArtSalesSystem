@@ -148,9 +148,11 @@ To update an existing item, send a `PATCH` request to `/api/items/{id}` with a J
 
 ```json
 {
-  "firstName": "Updated Name",
-  "email": "user@gmail.com",
-  "password": "user's password"
+  "artTitle": "Updated Title",
+  "artType": "Sculpture",
+  "artPrice": 299.00,
+  "artDescription": "An updated kinda art"
+
 }
 ```
 
