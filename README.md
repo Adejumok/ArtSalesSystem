@@ -129,9 +129,8 @@ Here are a few examples of how to use this project:
 
 To get a list of all arts, send a `GET` request to `/api/v1/art/getAllArts`.
 
-#### Example 2: Adding a new user
+#### Example 2: Adding a new art
 
-To add a new user, send a `POST` request to `/signup` with a JSON payload containing the user data.
 
 ```json
 {
