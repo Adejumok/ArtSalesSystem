@@ -64,7 +64,7 @@ mvn package
 To run the project locally, follow these steps:
 
 ```bash
-java -jar target/project-name-X.X.X.jar
+java -jar target/artSalesSystem-X.X.X.jar
 ```
 
 The application will be running at `http://localhost:8080`.
