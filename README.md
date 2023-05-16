@@ -48,7 +48,7 @@ git clone https://github.com/Adejumok/ArtSalesSystem
 2. Change directory to the project folder:
 
 ```bash
-cd project-name
+cd artSalesSystem
 ```
 
 3. Create a Postgres database and update the database connection details in the `application.properties` file.
