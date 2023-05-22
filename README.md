@@ -116,11 +116,11 @@ Here are the available API endpoints:
 | Method | Endpoint | Description |
 | ------ | -------- | ----------- |
 | POST   | /api/v1/auth/register | Registers a new user. |
-| POST    | /api/v1/auth/login | Updates the user with the specified ID. |
+| POST    | /api/v1/auth/login | Authenticates the user with the specified ID. |
 | GET    | /api/v1/art/getAllArts | Returns a list of all arts. |
 | GET    | /api/v1/art/getArt/{artId} | Returns the art with the specified ID. |
 | POST   | /api/v1/art/addArt | Adds a new art. |
-| PATCH    | /api/v1/art/update/{artId} | Updates the user with the specified ID. |
+| PATCH    | /api/v1/art/update/{artId} | Updates the art with the specified ID. |
 | DELETE | /api/v1/art/deleteBook/{artId} | Deletes the art with the specified ID. |
 
 ### Examples
