@@ -115,7 +115,7 @@ Here are the available API endpoints:
 
 | Method | Endpoint | Description |
 | ------ | -------- | ----------- |
-| POST   | /api/v1/art/addArt | Adds a new art. |
+| POST   | /api/v1/auth/register | Registers a new user. |
 | POST    | /api/v1/art/update/{artId} | Updates the user with the specified ID. |
 | GET    | /api/v1/art/getAllArts | Returns a list of all arts. |
 | GET    | /api/v1/art/getArt/{artId} | Returns the art with the specified ID. |
