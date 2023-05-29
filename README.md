@@ -146,7 +146,7 @@ To get a list of all arts, send a `GET` request to `/api/v1/art/getAllArts`.
 
 #### Example 3: Updating a art data
 
-To update an existing art, send a `PATCH` request to `/api/items/{id}` with a JSON payload containing the updated user's data.
+To update an existing art, send a `PATCH` request to `/api/items/{id}` with a JSON payload containing the updated art's data.
 
 ```json
 {
