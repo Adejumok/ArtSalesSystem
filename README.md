@@ -23,7 +23,7 @@ This application demonstrates the following:
 * Automatic CRUD functionality using Spring Repository pattern
 * RESTful service using annotation which supports both XML and JSON request/response
 * Spring Data Integration with JPA/Hibernate with familiar annotations and few lines of configuration
-* Security to authenticate and authorize users.
+* Security to authenticate and authorize users
  
 
 ## Getting Started
